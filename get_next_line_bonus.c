@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jecosta <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 17:41:53 by jecosta           #+#    #+#             */
-/*   Updated: 2024/12/09 14:50:09 by jecosta          ###   ########.fr       */
+/*   Updated: 2024/12/09 17:16:46 by jecosta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char		*ft_read_line(int fd, char *buffer, char *rest_line);
 char		*ft_line_extract(char *rest_line);
@@ -21,21 +21,21 @@ char	*get_next_line(int fd)
 {
 	char		*line;
 	char		*buffer;
-	static char	*rest_line;
+	static char	*rest_line[1024];
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (NULL);
-	line = ft_read_line(fd, buffer, rest_line);
+	line = ft_read_line(fd, buffer, rest_line[fd]);
 	free(buffer);
 	if (!line)
 	{
-		rest_line = 0;
+		rest_line[fd] = 0;
 		return (NULL);
 	}
-	rest_line = ft_line_extract(line);
+	rest_line[fd] = ft_line_extract(line);
 	return (line);
 }
 
@@ -132,17 +132,64 @@ size_t	ft_strlcat(char *dest, const char *src, size_t size)
 }
 
 /*#include <stdio.h>
-int	main(void)
+int main(void)
 {
-	int		fd;
-	char	*line;
+	int fd1, fd2, fd3, fd4, fd5;
+	char *line1, *line2, *line3, *line4, *line5;
 
-	fd = open("test1.txt", O_RDONLY);
-	while ((line = get_next_line(fd)) != NULL)
+	fd1 = open("test1.txt", O_RDONLY);
+	fd2 = open("test2.txt", O_RDONLY);
+	fd3 = open("test3.txt", O_RDONLY);
+	fd4 = open("test4.txt", O_RDONLY);
+	fd5 = open("test5.txt", O_RDONLY);
+
+	if (fd1 == -1 || fd2 == -1 || fd3 == -1 || fd4 == -1 || fd5 == -1)
 	{
-		printf("%s", line);
-		free(line);
+		perror("Erro ao abrir os arquivos");
+		return (1);
 	}
-	close(fd);
-	return (0);
+
+	while (1)
+	{
+		line1 = get_next_line(fd1);
+		line2 = get_next_line(fd2);
+		line3 = get_next_line(fd3);
+		line4 = get_next_line(fd4);
+		line5 = get_next_line(fd5);
+
+		if (!line1 && !line2 && !line3 && !line4 && !line5)
+			break;
+		if (line1)
+		{
+			printf("test1.txt: %s", line1);
+			free(line1);
+		}
+		if (line2)
+        	{
+            	printf("test2.txt: %s", line2);
+            	free(line2);
+		}
+		if (line3)
+		{
+			printf("test3.txt: %s", line3);
+			free(line3);
+		}
+		if (line4)
+		{
+			printf("test4.txt: %s", line4);
+			free(line4);
+		}
+		if (line5)
+		{
+			printf("test5.txt: %s", line5);
+			free(line5);
+		}
+	}
+	close(fd1);
+	close(fd2);
+	close(fd3);
+	close(fd4);
+	close(fd5);
+	
+	return 0;
 }*/
