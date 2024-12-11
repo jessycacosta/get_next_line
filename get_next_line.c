@@ -6,16 +6,11 @@
 /*   By: jecosta <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 17:41:53 by jecosta           #+#    #+#             */
-/*   Updated: 2024/12/09 14:50:09 by jecosta          ###   ########.fr       */
+/*   Updated: 2024/12/10 14:25:33 by jecosta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-char		*ft_read_line(int fd, char *buffer, char *rest_line);
-char		*ft_line_extract(char *rest_line);
-size_t		ft_strlcpy(char *dst, const char *src, size_t size);
-size_t		ft_strlcat(char *dest, const char *src, size_t size);
 
 char	*get_next_line(int fd)
 {

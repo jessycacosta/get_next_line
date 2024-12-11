@@ -6,16 +6,11 @@
 /*   By: jecosta <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 17:41:53 by jecosta           #+#    #+#             */
-/*   Updated: 2024/12/09 17:16:46 by jecosta          ###   ########.fr       */
+/*   Updated: 2024/12/10 14:25:48 by jecosta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-
-char		*ft_read_line(int fd, char *buffer, char *rest_line);
-char		*ft_line_extract(char *rest_line);
-size_t		ft_strlcpy(char *dst, const char *src, size_t size);
-size_t		ft_strlcat(char *dest, const char *src, size_t size);
 
 char	*get_next_line(int fd)
 {
@@ -145,7 +140,7 @@ int main(void)
 
 	if (fd1 == -1 || fd2 == -1 || fd3 == -1 || fd4 == -1 || fd5 == -1)
 	{
-		perror("Erro ao abrir os arquivos");
+		printf("Erro ao abrir os arquivos");
 		return (1);
 	}
 
