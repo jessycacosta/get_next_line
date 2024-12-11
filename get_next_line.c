@@ -6,7 +6,7 @@
 /*   By: jecosta <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 17:41:53 by jecosta           #+#    #+#             */
-/*   Updated: 2024/12/10 14:25:33 by jecosta          ###   ########.fr       */
+/*   Updated: 2024/12/11 18:48:29 by jecosta          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,7 @@ char	*get_next_line(int fd)
 	line = ft_read_line(fd, buffer, rest_line);
 	free(buffer);
 	if (!line)
-	{
-		rest_line = 0;
-		return (NULL);
-	}
+		return (rest_line = 0, NULL);
 	rest_line = ft_line_extract(line);
 	return (line);
 }
@@ -75,9 +72,7 @@ char	*ft_line_extract(char *line)
 	if (line[i] == '\0')
 		return (NULL);
 	if (line[i] == '\n')
-	{
 		rest_line = ft_substr(line, i + 1, ft_strlen(line) - i);
-	}
 	if (*rest_line == '\0')
 	{
 		free(rest_line);
